@@ -13,18 +13,28 @@ public class KillPlayer : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Player entered trigger.");
             playerInsideTrigger = true;
-            fadeout.SetActive(true);
+
+            if (fadeout != null)
+            {
+                fadeout.SetActive(true);
+                Debug.Log("Fadeout activated.");
+            }
+            else
+            {
+                Debug.LogWarning("Fadeout GameObject is not assigned!");
+            }
+
             Invoke("LoadNextScene", delay);
         }
     }
-
 
     private void LoadNextScene()
     {
         if (playerInsideTrigger)
         {
-            // Load the next scene by name
+            Debug.Log("Loading scene: " + nextSceneName);
             SceneManager.LoadScene(nextSceneName);
         }
     }
