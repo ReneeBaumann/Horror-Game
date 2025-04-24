@@ -17,9 +17,6 @@ public class Player : MonoBehaviour
     private Vector3 velocity;
     private float xRotation = 0f;
 
-	//public GameObject handUI; (added new)
-
-
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -45,7 +42,7 @@ public class Player : MonoBehaviour
 
         if (controller.isGrounded && velocity.y < 0)
         {
-            velocity.y = -2f; // small downward force to stick to ground
+            velocity.y = -2f; 
         }
 
         velocity.y += gravity * Time.deltaTime;
@@ -66,7 +63,7 @@ public class Player : MonoBehaviour
 
     void HandleInteraction()
     {
-        if (Input.GetButtonDown("Interact")) // Ensure you're using the correct "Interact" input
+        if (Input.GetButtonDown("Interact")) 
         {
             Ray ray = new Ray(playerCamera.position, playerCamera.forward);
             RaycastHit hit;

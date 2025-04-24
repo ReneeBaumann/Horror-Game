@@ -58,11 +58,11 @@ public class Gun : MonoBehaviour
                 if (impactEffect)
                     Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
 
-                // 👇 NEW CODE: Check if we hit an enemy
+                // Check if we hit an enemy
                 EnemyHealth enemy = hit.collider.GetComponent<EnemyHealth>();
                 if (enemy != null)
                 {
-                    enemy.TakeDamage(25); // You can change 25 to whatever damage you want
+                    enemy.TakeDamage(25); 
                 }
             }
 
