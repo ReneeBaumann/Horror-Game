@@ -1,47 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
+
 
 public class Door : MonoBehaviour
 {
     public GameObject handUI;
     public GameObject UIText;
-
-    public GameObject invKey;
+    public GameObject invKey;  // Represents key being collected
     public GameObject fadeFX;
+    public string nextSceneName;
 
-    public string nextSceneName; // Name of the next scene to load
-
-
-    private bool inReach;
-
+    private bool inReach = false;
 
     void Start()
     {
         handUI.SetActive(false);
         UIText.SetActive(false);
-
-        invKey.SetActive(false);
-
         fadeFX.SetActive(false);
-
-
+        invKey.SetActive(false); // Only if you're sure this is inactive until collected
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Reach")
+        if (other.CompareTag("Player"))
         {
             inReach = true;
             handUI.SetActive(true);
         }
-
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Reach")
+        if (other.CompareTag("Player"))
         {
             inReach = false;
             handUI.SetActive(false);
@@ -51,27 +42,29 @@ public class Door : MonoBehaviour
 
     void Update()
     {
-
-
-        if (inReach && Input.GetButtonDown("Interact") && !invKey.activeInHierarchy)
+        if (inReach && Input.GetKeyDown(KeyCode.E))
         {
-            handUI.SetActive(true);
-            UIText.SetActive(true);
-        }
+            Debug.Log("E pressed while in reach");
 
-        if (inReach && Input.GetButtonDown("Interact") && invKey.activeInHierarchy)
-        {
-            handUI.SetActive(false);
-            UIText.SetActive(false);
-            fadeFX.SetActive(true);
-            StartCoroutine(ending());
+            if (invKey.activeInHierarchy)
+            {
+                Debug.Log("Key is active. Starting ending.");
+                handUI.SetActive(false);
+                UIText.SetActive(false);
+                fadeFX.SetActive(true);
+                StartCoroutine(ending());
+            }
+            else
+            {
+                Debug.Log("Key not active. Showing text.");
+                UIText.SetActive(true);
+            }
         }
     }
 
     IEnumerator ending()
     {
-        yield return new WaitForSeconds(.6f);
+        yield return new WaitForSeconds(0.6f);
         SceneManager.LoadScene(nextSceneName);
     }
-
 }
