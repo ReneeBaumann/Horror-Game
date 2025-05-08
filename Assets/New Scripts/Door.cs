@@ -6,7 +6,7 @@ public class Door : MonoBehaviour
 {
     public GameObject handUI;
     public GameObject UIText;
-    public GameObject invKey;  // Represents key being collected
+    public GameObject invKey;  
     public GameObject fadeFX;
     public string nextSceneName;
 
@@ -17,7 +17,7 @@ public class Door : MonoBehaviour
         handUI.SetActive(false);
         UIText.SetActive(false);
         fadeFX.SetActive(false);
-        invKey.SetActive(false); // Only if you're sure this is inactive until collected
+        invKey.SetActive(false); 
     }
 
     void OnTriggerEnter(Collider other)

@@ -13,13 +13,11 @@ public class EnemyHealth : MonoBehaviour
     // Function to apply damage to the enemy.
     public void TakeDamage(int damageAmount)
     {
-        // Reduce the current health by the damage amount.
         currentHealth -= damageAmount;
 
-        // Check if the enemy's health has reached zero or below.
         if (currentHealth <= 0)
         {
-            Die(); // Call the function to handle the enemy's death.
+            Die(); 
         }
     }
 

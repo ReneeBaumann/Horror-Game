@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        audioSource = GetComponent<AudioSource>(); // ✅ Automatically get the attached AudioSource
+        audioSource = GetComponent<AudioSource>(); // Automatically get the attached AudioSource
         Cursor.lockState = CursorLockMode.Locked;
     }
 

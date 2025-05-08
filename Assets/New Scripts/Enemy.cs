@@ -40,7 +40,7 @@ public class Enemy : MonoBehaviour
             case EnemyState.Idle:
                 idleTimer += Time.deltaTime;
                 animator.SetBool("isWalking", false);
-                animator.SetBool("isChasing", false); // Ensure IsChasing is set to false in the idle state.
+                animator.SetBool("isChasing", false); 
                 PlaySound(idleSound);
 
                 if (idleTimer >= idleTime)
@@ -54,7 +54,7 @@ public class Enemy : MonoBehaviour
             case EnemyState.Walk:
                 idleTimer = 0f;
                 animator.SetBool("isWalking", true);
-                animator.SetBool("isChasing", false); // Set IsChasing to false when walking.
+                animator.SetBool("isChasing", false); 
                 PlaySound(walkingSound);
 
                 if (agent.remainingDistance <= agent.stoppingDistance)
@@ -67,19 +67,18 @@ public class Enemy : MonoBehaviour
 
             case EnemyState.Chase:
                 idleTimer = 0f;
-                agent.speed = chaseSpeed; // Set the chase speed.
+                agent.speed = chaseSpeed; 
                 agent.SetDestination(player.position);
-                isChasingAnimation = true; // Set to true in chase state.
-                animator.SetBool("isChasing", true); // Set IsChasing to true in chase state.
+                isChasingAnimation = true; 
+                animator.SetBool("isChasing", true); 
 
                 // Play chasing sound.
                 PlaySound(chasingSound);
 
-                // Check if the player is out of sight and go back to the walk state.
                 if (Vector3.Distance(transform.position, player.position) > sightDistance)
                 {
                     currentState = EnemyState.Walk;
-                    agent.speed = walkSpeed; // Restore walking speed.
+                    agent.speed = walkSpeed; 
                 }
                 break;
         }
@@ -119,11 +118,10 @@ public class Enemy : MonoBehaviour
     {
         agent.SetDestination(waypoints[currentWaypointIndex].position);
         currentState = EnemyState.Walk;
-        agent.speed = walkSpeed; // Set the walking speed.
+        agent.speed = walkSpeed; 
         animator.enabled = true;
     }
 
-    // Draw a green raycast line at all times and switch to red when the player is detected.
     private void OnDrawGizmos()
     {
         Gizmos.color = currentState == EnemyState.Chase ? Color.red : Color.green;
